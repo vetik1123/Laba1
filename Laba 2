@@ -1,0 +1,32 @@
+#include <iostream>
+#include <clocale>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+	char ch1[255], ch2[255], ch3[255], ch4[255], ch5[255], a[255], b[255], c[255], d[255];
+	int i, in, ix, n1 = 0, n2 = 0, n3 = 0, n4 = 0, n5 = 0, n6 = 0, n7 = 0, n8 = 0, n9 = 0, cc[5] = {17, 312, 32, 120, 127};
+	int A, B, C, D, x, y;
+
+
+	cout << "Input A, B, C, D: ";
+	cin >> A >> B >> C >> D;
+	
+	auto st = cin.rdstate();
+	if (st != cin.goodbit) { cin.clear(); cout << " error \n"; cin.get(); cin.get(); return 0; }
+	x = (((A << 4) + A) + (((((C << 8) - C + (C << 6) - C) - C) - (C >> 3) - C) - (C << 2))) >> 5;
+	x = x -(x-(x-(B << 7)) + ((B >> 3)-x) - x+(x-(B << 3)) + x-((D << 7) - D));
+	y = (A * 17 + 312 * C) / 32 - B * 120 + D * 127;
+	
+
+
+	cout << x << endl;
+	cout << y << endl;
+
+	cout << "Reading file" << endl;
+
+
+	return 0;
+}
