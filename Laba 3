@@ -1,0 +1,102 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+class Triangle 
+{
+public:
+	double a, b, c;
+	unsigned int color;
+private:
+
+	Triangle() : a(1.0), b(1.0), c(1.0), color(0){}
+	Triangle(double ai): a(ai), b(1.0), c(1.0), color(0) {}
+	Triangle(double bi): a(1.0), b(bi), c(1.0), color(0) {}
+	Triangle(double ci) : a(1.0), b(1.0), c(ci), color(0) {}
+	Triangle(double a, double b, double c, int color) {
+		if (a >= 1.0)
+			this->a = a;
+		else
+			this->a = 1.0;
+		if (b >= 1.0)
+			this->b = b;
+		else
+			this->b = 1.0;
+		if (c >= 1.0)
+			this->c = c;
+		else
+			this->c = 1.0;
+		if (color >= 0)
+			this->color = color;
+		else
+			this->color = 0;
+	}
+	double getA() const
+	{
+		return a;
+	}
+	void setA(double a)
+	{
+		if (a < 0 || a > 1.e+100)
+		{
+			cout << " Error set  a \n";
+			return;
+		}
+		this->a = a;
+	}
+	double getB() const
+	{
+		return b;
+	}
+	void setB(double b)
+	{
+		if (b < 0 || b > 1.e+100)
+		{
+			cout << " Error set  b \n";
+			return;
+		}
+		this->b = b;
+	}
+	double getC() const
+	{
+		return c;
+	}
+	void setC(double c)
+	{
+		if (c < 0 || c > 1.e+100)
+		{
+			cout << " Error set  c \n";
+			return;
+		}
+		this->c = c;
+	}
+	double getColor() const
+	{
+		return color;
+	}
+	void setColor(int color)
+	{
+		if (color < 0 || color > 10000)
+		{
+			cout << " Error set  color \n";
+			return;
+		}
+		this->color = color;
+	}
+	double P() 
+	{
+		return a + b + c;
+	}
+	double S()
+	{
+		double p;
+		p = P() / 2;
+		return sqrt(p * (p - a) * (p - b) * (p - c));
+	}
+	void PrintIn()
+	{
+		cout << "/n A= " << a << "  B= " << b << "  C= " << c << endl;
+		cout << "P = " << P() << "    S = " << S() << endl;
+	}
+};
