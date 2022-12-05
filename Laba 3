@@ -133,3 +133,106 @@ int mainExample1()
 	cout << " End testing \n";
 	return 1;
 }
+//-----Ex 2----------------------------------------------------------
+class VC
+{
+	long* l;
+	int state = 0;
+	static int count;
+
+public:
+	VC() : VC(2) {}
+	VC(int c);
+	VC(int c, long&);
+	VC(int c, long*);
+	VC(const VC& s);
+	VC& operator=(const VC& s);
+	~VC() {
+		std::cout << " del vec";
+		if (l) delete[] l;
+	}
+	void Output();
+	void Input();
+	//void 
+	VC Add(VC& b);
+};
+
+VC::VC(int c) {
+	if (c <= 0)    c = 2;
+	count = c;
+	l = new long[c];
+	for (int i = 0; i < c; i++) {
+		l[i] = 0.0;
+	}
+}
+VC::VC(int c, long& b) : VC(c) {
+	for (int i = 0; i < count; i++) {
+		l[i] = b; 
+	}
+}
+
+VC::VC(int c, long* p) : VC(c) {
+	if (p != nullptr)
+		for (int i = 0; i < count; i++)
+			l[i] = p[i];
+
+}
+
+VC::VC(const VC& s) {
+	count = s.count;
+	l = new long[count];
+	state = 0;
+	for (int i = 0; i < count; i++)   
+		l[i] = s.l[i];
+}
+
+VC& VC::operator=(const VC& s) {
+
+	if (count != s.count)
+	{
+		if (l) delete[] l;
+		count = s.count;
+		l = new long[count];
+		state = 0;
+	}
+	for (int i = 0; i < count; i++)   l[i] = s.l[i];
+	return *this;
+}
+void VC::Input() {
+	int in_c = 0;
+	do {
+		cout << "Input size Vec\n";
+		cin >> in_c;
+	} while (in_c <= 0);
+	if (count != in_c) {
+		count = in_c;
+		if (l) delete[] l;
+		l = new long[count];
+	}
+	for (int i = 0; i < count; i++) 
+	{
+		cout << " l[" << i << "] ";
+		cin >> l[i];
+	}
+}
+
+void VC::Output() {
+	if (count != 0) {
+		for (int i = 0; i < count; i++) {
+			cout << " l [ " << i << " ]   " << l[i] << '\t';
+			cout << endl;
+		}
+	}
+}
+
+VC VC::Add(VC& b) {
+	int tc;
+	tc = count < b.count ? count : b.count;
+	if (tc >= 0) {
+		VC tmp(tc);
+		for (int i = 0; i < tc; i++) 
+			tmp.l[i] = l[i] + b.l[i];
+		return tmp;
+	}
+	return VC(1);
+}
