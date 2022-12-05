@@ -100,3 +100,36 @@ private:
 		cout << "P = " << P() << "    S = " << S() << endl;
 	}
 };
+int mainExample1()
+{
+	Triangle obj;
+	obj.PrintIn();
+
+	double in_a, in_b, in_c;
+	int in_color;
+	
+	cout << " Input sides Triangle  "; cin >> in_a >> in_b >> in_c;
+	cout << "  Input color Triangle  "; cin >> in_color;
+	Triangle obj1(in_a), obj2(in_color), obj3(in_a, in_b, in_c, in_color);
+	obj1.PrintIn();
+	obj2.PrintIn();
+	obj3.PrintIn();
+	obj.setA(-5);
+	obj.PrintIn();
+	obj.setA(5);
+	obj.PrintIn();
+	obj.setB(2.e100);
+	obj.PrintIn();
+	obj.setColor(-10);
+	obj.PrintIn();
+	obj.setColor(10);
+	obj.PrintIn();
+	obj.setColor(10001);
+	obj.PrintIn();
+	obj.setC(0.5);
+	obj.PrintIn();
+	obj.setC(10);
+	obj.PrintIn();
+	cout << " End testing \n";
+	return 1;
+}
