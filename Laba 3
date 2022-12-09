@@ -153,8 +153,91 @@ public:
 	}
 	void Output();
 	void Input();
-	//void 
-	VC Add(VC& b);
+	void ADD(long i)
+	{
+		if (i >= count)
+		{
+			cout << "Wrong index" << endl;
+			return;
+		}
+		else
+		{
+			l[i] = 10;
+			cout << "l[" << i << "] = 10" << endl;
+		}
+	};
+	long SET(int i)
+	{
+		if (i >= count)
+			return 0;
+		else
+			return l[i];
+	};
+	VC Plus(VC& b)
+	{
+		int tnum;
+		tnum = count < b.count ? count : b.count;
+		if (tnum >= 0) {
+			VC tmp(tnum);
+			for (int i = 0; i < tnum; i++) tmp.l[i] = l[i] + b.l[i];
+			return tmp;
+		}
+		return VC(1);
+	}
+	VC Minus(VC& b)
+	{
+		int tnum;
+		tnum = count < b.count ? count : b.count;
+		if (tnum >= 0) {
+			VC tmp(tnum);
+			for (int i = 0; i < tnum; i++) tmp.l[i] = l[i] - b.l[i];
+			return tmp;
+		}
+		return VC(1);
+	};
+	VC Multip(unsigned int t)
+	{
+		VC b(count);
+		for (int i = 0; i < count; i++)
+			b.l[i] = l[i] * t;
+		return b;
+	};
+	bool Less(VC& s)
+	{
+		if (count < s.count)
+			return true;
+		else if (count > s.count)
+			return false;
+		for (int i = 0; i < count; i++)
+		{
+			if (l[i] > s.l[i])
+				return false;
+		}
+		return true;
+	}
+	bool More(VC& s)
+	{
+		if (count > s.count)
+			return true;
+		else if (count < s.count)
+			return false;
+		for (int i = 0; i < count; i++)
+		{
+			if (l[i] < s.l[i])
+				return false;
+		}
+		return true;
+	}
+	bool EQ(VC& s)
+	{
+		if (count != s.count)
+			return false;
+		for (int i = 0; i < count; i++)
+			if (l[i] != s.l[i])
+				return false;
+		return true;
+	}
+
 };
 
 VC::VC(int c) {
@@ -162,7 +245,7 @@ VC::VC(int c) {
 	count = c;
 	l = new long[c];
 	for (int i = 0; i < c; i++) {
-		l[i] = 0.0;
+		l[i] = 0;
 	}
 }
 VC::VC(int c, long& b) : VC(c) {
@@ -225,14 +308,26 @@ void VC::Output() {
 	}
 }
 
-VC VC::Add(VC& b) {
-	int tc;
-	tc = count < b.count ? count : b.count;
-	if (tc >= 0) {
-		VC tmp(tc);
-		for (int i = 0; i < tc; i++) 
-			tmp.l[i] = l[i] + b.l[i];
-		return tmp;
-	}
-	return VC(1);
+
+int MainExample2()
+{
+	long m=5;
+	VC v, w(3), k(3, &m), g;
+	k.Output();
+	g = w.Plus(v);
+	cout << "w + v = "; g.Output();
+	w.Output();
+	v = w;
+	v.Output();
+	cout << v.EQ(w);
+	v.Multip(3);
+	cout << w.Less(v);
+	k.Input();
+	g = k.Minus(g);
+	VC c(g);
+	w.SET(2);
+	w.SET(10);
+	c.ADD(3);
+
+	return 1;
 }
